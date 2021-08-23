@@ -5,5 +5,5 @@ public class Hat {
     private boolean isCaptured;
     private int id;
     private int playerId;
-
+    
 }
