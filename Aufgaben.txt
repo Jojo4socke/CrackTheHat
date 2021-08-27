@@ -1,0 +1,18 @@
+- User Interface
+    - Spielbretter (4 und 6 Spieler)
+    - Spielfiguren
+    - Spielbrett passt sich dem Viewport an
+
+- Spiellogik / Regeln
+    - Bewegung der Figuren auf dem Spielfeld
+    - KI
+
+- Singleplayer mit KI
+
+- Multiplayer
+    - Connect devices to host
+    - lokaler Multiplayer
+    - öffentlicher Multiplayer
+        - mit Spring Boot ?
+        - über Webseite ?
+        - über GitHub ?
