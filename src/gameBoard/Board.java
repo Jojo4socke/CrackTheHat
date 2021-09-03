@@ -2,6 +2,7 @@ package gameBoard;
 
 import gameBoard.field.Field;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,6 +33,10 @@ public class Board {
      */
     private static List<Field> generateBoard() {
         //TODO: implement actual board generation
-        return null;
+        ArrayList<Field> board = new ArrayList<>();
+        for(int i = 0; i < 80; i++) {
+            board.add(new Field(i));
+        }
+        return board;
     }
 }
