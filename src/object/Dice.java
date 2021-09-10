@@ -20,7 +20,7 @@ public class Dice {
      * Throws the dice.
      * @return random number between 1 and 6.
      */
-    public static int throwDice() {
+    protected static int throwDice() {
         Random rn = new Random();
         // set boundaries. As nextInt returns 0 otherwise
         return rn.nextInt(maxEyes-1) + 1;
