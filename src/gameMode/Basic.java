@@ -1,5 +1,7 @@
 package gameMode;
 
+import java.util.HashMap;
+
 /**
  * Normal game for 2-6 players.
  *
@@ -7,5 +9,5 @@ package gameMode;
  * @version 2021-08-23
  */
 public class Basic {
-
+    
 }

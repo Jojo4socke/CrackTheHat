@@ -3,6 +3,7 @@ package game;
 import gameBoard.Board;
 import object.Player;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,7 +29,7 @@ public class Game {
     /**
      * @param players list of players who participate in the game
      */
-    private List<Player> players;
+    private ArrayList<Player> players;
     /**
      * @param activePlayer current player on turn
      */
@@ -39,8 +40,12 @@ public class Game {
      * Contructor to create a game.
      * @param numberOfPlayers number of players to start the game
      */
-    public Game(int numberOfPlayers) {
+    public Game(int numberOfPlayers, String gameMode) {
         playerCount = numberOfPlayers;
+
+        for(int i = 1; i <= playerCount; i++) {
+            players.add(new Player());
+        }
         // create players
         // create hats
         // create game board

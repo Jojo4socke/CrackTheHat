@@ -17,8 +17,8 @@ public class Player {
     /**
      * Constructor to create a player.
      */
-    public Player() {
-
+    public Player(int activeHats) {
+        this.activeHats = activeHats;
     }
 
 }
