@@ -9,11 +9,13 @@ import java.util.HashMap;
 // - updates on captured hats
 // - probably a bunch of other stuff.
 // - if player can walk backwards need to add some kind of direction to update position of hat?
+//75 max field
 
 public class Hat extends JFrame {
     String hatColour;
     String numCapturedHats;
     int hatPosition = 0; // needs to be replaced with starting field
+    int playerID;
 
     private void createPlayerHat(Graphics g, Color colorPlayer) {
         Graphics2D g2d = (Graphics2D) g;
@@ -29,7 +31,7 @@ public class Hat extends JFrame {
 
     }
 
-    public Hat(String color, String hatCaptures, int eyes ){
+    private Hat(String color, String hatCaptures, int eyes, int playerID){
         // create JFrame can be removed later, probably
         setTitle("Hat");
         setSize(400, 400);
@@ -40,6 +42,8 @@ public class Hat extends JFrame {
         this.numCapturedHats = hatCaptures;
         this.hatPosition = getHatPosition();
         onRoll(eyes);
+        this.playerID = playerID;
+
     }
     @Override
     public void paint(Graphics g) {
@@ -54,21 +58,21 @@ public class Hat extends JFrame {
         createCapturedHatsString(g,numCapturedHats);
     }
 
-    public int getHatPosition(){
+    private int getHatPosition(){
         return hatPosition;
     }
 
-    public void setHatPosition(int position){
+    private void setHatPosition(int position){
         this.hatPosition += position;
     }
 
-    public void onRoll(int eyes){
+    private void onRoll(int eyes){
         setHatPosition(eyes);
     }
 
     public static void main(String[] args) {
         // eyes set to zero as there was no dice roll yet;
-        Hat crackHat = new Hat("blue","6",0);
+        Hat crackHat = new Hat("blue","6",0, 1);
         System.out.println("start");
         System.out.println(crackHat.getHatPosition());
         // simulating dice throws
