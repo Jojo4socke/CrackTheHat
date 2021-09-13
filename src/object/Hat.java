@@ -1,46 +1,85 @@
 package object;
 
-import java.util.List;
+import object.Dice;
+import javax.swing.*;
+import java.awt.*;
+import java.util.HashMap;
+//TODO
+// -Player position on board (kinda implemented)
+// - updates on captured hats
+// - probably a bunch of other stuff.
+// - if player can walk backwards need to add some kind of direction to update position of hat?
+//75 max field
 
-/**
- * Game piece in form of a hat.
- *
- * @author Cedric Nees, Daniel Schedek, Dominik Vennegeerts, Jonathan Uhlmann, Vanessa Grauer
- * @version 2021-08-23
- */
-public class Hat {
-    // Parameters
-    /**
-     * @param hatId unique id on the game board
-     */
-    private int hatId;
-    /**
-     * @param playerId player who participates
-     */
-    private int playerId;
-    /**
-     * @param currentField field number on which the game piece is located
-     */
-    private int currentField;
-    /**
-     * @param amountCapturedHats amount of hats that have been captured
-     */
-    private int amountCapturedHats;
-    /**
-     * @param isCaptured indicates whether this hat is captured or not
-     */
-    private boolean isCaptured;
-    /**
-     * @param capturedHats list of all hats that are currently captured by the hat
-     */
-    private List<Hat> capturedHats;
+public class Hat extends JFrame {
+    String hatColour;
+    String numCapturedHats;
+    int hatPosition = 0; // needs to be replaced with starting field
+    int playerID;
 
-    // Constructors
-    /**
-     * Constructor to create a hat.
-     */
-    public Hat() {
+    private void createPlayerHat(Graphics g, Color colorPlayer) {
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setColor(colorPlayer);
+        g2d.fillOval(150, 150, 100, 100);
+    }
+
+    private  void createCapturedHatsString(Graphics g, String capturedHats){
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setColor(Color.BLACK);
+        g.setFont(new Font("TimesRoman", Font.BOLD, 50));
+        g2d.drawString(capturedHats, 185, 210);
 
     }
 
+    private Hat(String color, String hatCaptures, int eyes, int playerID){
+        // create JFrame can be removed later, probably
+        setTitle("Hat");
+        setSize(400, 400);
+        setVisible(true);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        // pass params
+        this.hatColour = color;
+        this.numCapturedHats = hatCaptures;
+        this.hatPosition = getHatPosition();
+        onRoll(eyes);
+        this.playerID = playerID;
+
+    }
+    @Override
+    public void paint(Graphics g) {
+        // map colours to Color Object to change colour of Player
+        HashMap<String, Color> colourMapper = new HashMap<>();
+        colourMapper.put("blue", Color.blue);
+        colourMapper.put("yellow", Color.yellow);
+        colourMapper.put("green", Color.green);
+        colourMapper.put("pink", Color.pink);
+
+        createPlayerHat(g, colourMapper.get(hatColour));
+        createCapturedHatsString(g,numCapturedHats);
+    }
+
+    private int getHatPosition(){
+        return hatPosition;
+    }
+
+    private void setHatPosition(int position){
+        this.hatPosition += position;
+    }
+
+    private void onRoll(int eyes){
+        setHatPosition(eyes);
+    }
+
+    public static void main(String[] args) {
+        // eyes set to zero as there was no dice roll yet;
+        Hat crackHat = new Hat("blue","6",0, 1);
+        System.out.println("start");
+        System.out.println(crackHat.getHatPosition());
+        // simulating dice throws
+        for (int i = 0; i < 2; i++){
+            System.out.println("Position throw" + i);
+            crackHat.onRoll(Dice.throwDice());
+            System.out.println(crackHat.getHatPosition());
+        }
+    }
 }
