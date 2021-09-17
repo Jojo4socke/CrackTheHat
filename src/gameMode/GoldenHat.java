@@ -8,4 +8,7 @@ package gameMode;
  */
 public class GoldenHat extends Basic {
 
+    public GoldenHat(int playerCount) {
+        super(playerCount);
+    }
 }

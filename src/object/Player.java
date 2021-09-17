@@ -13,12 +13,15 @@ public class Player {
      */
     private int activeHats;
 
+    private int id;
+
     // Constructors
     /**
      * Constructor to create a player.
      */
-    public Player(int activeHats) {
+    public Player(int activeHats, int id) {
         this.activeHats = activeHats;
+        this.id = id;
     }
 
 }

@@ -8,4 +8,7 @@ package gameMode;
  */
 public class Team extends Basic {
 
+    public Team(int playerCount) {
+        super(playerCount);
+    }
 }
