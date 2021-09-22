@@ -50,11 +50,10 @@ public class Game {
         this.playerCount = playerCount;
         this.gameMode = changeGamemMode(gameMode);
         players = createPlayers(playerCount);
+        gameBoard = new Board();
 
 
-        //TODO: create players
-        //      create hats
-        //      create game board
+        //TODO: create hats
     }
 
     public static void main(String[] args) {

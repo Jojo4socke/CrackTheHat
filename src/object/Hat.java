@@ -1,5 +1,6 @@
 package object;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,22 +26,38 @@ public class Hat {
     /**
      * @param amountCapturedHats amount of hats that have been captured
      */
-    private int amountCapturedHats;
+    private int amountCapturedHats = 0;
     /**
      * @param isCaptured indicates whether this hat is captured or not
      */
-    private boolean isCaptured;
+    private boolean isCaptured = false;
     /**
      * @param capturedHats list of all hats that are currently captured by the hat
      */
-    private List<Hat> capturedHats;
+    private ArrayList<Hat> capturedHats = new ArrayList<>();
 
     // Constructors
     /**
      * Constructor to create a hat.
      */
-    public Hat() {
-
+    public Hat(int hatId, int playerId) {
+        this.hatId = hatId;
+        this.playerId = playerId;
     }
+
+    public void updateField(int nextField) {
+        currentField = nextField;
+    }
+
+    public void capture(Hat hat) {
+        capturedHats.add(hat);
+        hat.isCaptured();
+    }
+
+    public void isCaptured() {
+        isCaptured = true;
+    }
+
+
 
 }

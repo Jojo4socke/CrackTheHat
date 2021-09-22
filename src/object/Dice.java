@@ -15,6 +15,8 @@ public class Dice {
      */
     final static int maxEyes = 6;
 
+    final static int minEyes = 1;
+
     // Methods
     /**
      * Throws the dice.
@@ -22,6 +24,6 @@ public class Dice {
      */
     private static int throwDice() {
         Random rn = new Random();
-        return rn.nextInt(maxEyes);
+        return rn.nextInt(maxEyes + 1 - minEyes) + minEyes;
     }
 }
