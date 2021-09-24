@@ -16,6 +16,7 @@ public class Hat extends JFrame {
     String numCapturedHats;
     int hatPosition = 0; // needs to be replaced with starting field
     int playerID;
+    int maxField = 75;
 
     private void createPlayerHat(Graphics g, Color colorPlayer) {
         Graphics2D g2d = (Graphics2D) g;
@@ -49,10 +50,13 @@ public class Hat extends JFrame {
     public void paint(Graphics g) {
         // map colours to Color Object to change colour of Player
         HashMap<String, Color> colourMapper = new HashMap<>();
+
         colourMapper.put("blue", Color.blue);
         colourMapper.put("yellow", Color.yellow);
         colourMapper.put("green", Color.green);
         colourMapper.put("pink", Color.pink);
+        colourMapper.put("orange", Color.orange);
+        colourMapper.put("magenta", Color.magenta);
 
         createPlayerHat(g, colourMapper.get(hatColour));
         createCapturedHatsString(g,numCapturedHats);
@@ -66,20 +70,31 @@ public class Hat extends JFrame {
         this.hatPosition += position;
     }
 
+    // hat position cant exceed maxField, maxField is 75 on a 4 player board
     private void onRoll(int eyes){
-        setHatPosition(eyes);
+        if(eyes + getHatPosition() <= maxField){
+                setHatPosition(eyes);
+        }else{
+            this.hatPosition = 0;
+        }
     }
 
     public static void main(String[] args) {
-        // eyes set to zero as there was no dice roll yet;
-        Hat crackHat = new Hat("blue","6",0, 1);
+        // testing
+        // creating multiple hats
+        Hat[] obj = new Hat[5];
+        obj[0] = new Hat("blue","1",0,1);
+        obj[1] = new Hat("magenta","2",0,2);
+        obj[2] = new Hat("orange","3",0,3);
+        obj[3] = new Hat("pink","4",0,4);
+        obj[4] = new Hat("green","5",0,5);
+        //Hat crackHat = new Hat("magenta","6",0, 1);
         System.out.println("start");
-        System.out.println(crackHat.getHatPosition());
         // simulating dice throws
-        for (int i = 0; i < 2; i++){
-            System.out.println("Position throw" + i);
-            crackHat.onRoll(Dice.throwDice());
-            System.out.println(crackHat.getHatPosition());
+        for (int i = 0; i < obj.length; i++){
+            System.out.println("Position throw " + i + "of " + obj[i].hatColour);
+            obj[i].onRoll(Dice.throwDice());
+            System.out.println(obj[i].getHatPosition());
         }
     }
 }
