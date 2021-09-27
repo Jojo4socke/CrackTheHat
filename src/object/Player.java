@@ -1,5 +1,7 @@
 package object;
 
+import java.util.ArrayList;
+
 /**
  * Player that participates in the game.
  *
@@ -15,6 +17,8 @@ public class Player {
 
     private int id;
 
+    private ArrayList<Hat> allHats;
+
     // Constructors
     /**
      * Constructor to create a player.
@@ -22,6 +26,14 @@ public class Player {
     public Player(int activeHats, int id) {
         this.activeHats = activeHats;
         this.id = id;
+        this.allHats = createHats();
     }
 
+    private ArrayList<Hat> createHats() {
+        ArrayList<Hat> hats = new ArrayList<>();
+        for(int i = 1; i <= activeHats; i++) {
+            hats.add(new Hat(i,id));
+        }
+        return hats;
+    }
 }
