@@ -20,8 +20,9 @@ public class Dice {
      * Throws the dice.
      * @return random number between 1 and 6.
      */
-    private static int throwDice() {
+    protected static int throwDice() {
         Random rn = new Random();
-        return rn.nextInt(maxEyes);
+        // set boundaries. As nextInt returns 0 otherwise
+        return rn.nextInt(maxEyes-1) + 1;
     }
 }
