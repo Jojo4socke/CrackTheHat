@@ -16,3 +16,9 @@
         - mit Spring Boot ?
         - über Webseite ?
         - über GitHub ?
+
+Aufgabenverteilung:
+
+GUI: Dominik, Cedric, Daniel
+board-generation: Jonathan
+game-rules: Vanessa
