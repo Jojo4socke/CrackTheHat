@@ -1,5 +1,4 @@
 package object;
-
 import object.Dice;
 import javax.swing.*;
 import java.awt.*;

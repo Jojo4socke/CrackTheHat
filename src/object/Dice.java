@@ -15,6 +15,8 @@ public class Dice {
      */
     final static int maxEyes = 6;
 
+    final static int minEyes = 1;
+
     // Methods
     /**
      * Throws the dice.

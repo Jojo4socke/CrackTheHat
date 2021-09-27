@@ -8,4 +8,7 @@ package gameMode;
  */
 public class Tower extends Basic {
 
+    public Tower(int playerCount) {
+        super(playerCount);
+    }
 }
