@@ -30,6 +30,14 @@ public class Board {
 
     // Methods
     /**
+     * Getter for allFields.
+     * @return allFields
+     */
+    public List<Field> getAllFields() {
+        return allFields;
+    }
+
+    /**
      * Create the fields on the game board.
      * @return all fields on the board
      */
@@ -46,6 +54,16 @@ public class Board {
                 board.add(new Field(i));
             }
         }
+        generateNeighbours();
         return board;
+    }
+
+    /**
+     * Generate neighbours for every field on the board.
+     */
+    private void generateNeighbours() {
+        for (Field field : allFields) {
+            field.setNeighbours4P();
+        }
     }
 }

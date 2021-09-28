@@ -8,6 +8,16 @@ package gameBoard.field;
  * @version 2021-08-23
  */
 public class SaveField extends Field {
+    // Parameters
+    /**
+     * @param maxGamePieces the maximum of game pieces that can rest on the field
+     */
+    private final int maxGamePieces = 3;
+    /**
+     * @param restingGamePieces amount of current game pieces that are resting on the field
+     */
+    private int restingGamePieces;
+
     // Constructors
     /**
      * Constructor to create a resting field.
@@ -15,6 +25,38 @@ public class SaveField extends Field {
      */
     public SaveField(int fieldNumber) {
         super(fieldNumber);
+    }
+
+    // Methods
+    /**
+     * Get amount of game pieces that are currently resting on the field.
+     * @return amount of game pieces
+     */
+    public int countGamePieces() {
+        return restingGamePieces;
+    }
+
+    /**
+     * Game piece joins field to rest.
+     */
+    public void joinField() {
+        if(restingGamePieces < maxGamePieces) {
+            restingGamePieces++;
+        } else {
+            System.out.println("Resting not possible!");
+        }
+    }
+
+    /**
+     * Game piece leaves resting field.
+     */
+    public void leaveField() {
+        restingGamePieces--;
+    }
+
+    @Override
+    public String toString() {
+        return restingGamePieces + "/" + maxGamePieces + " resting spots taken.";
     }
 
 }

@@ -1,5 +1,7 @@
 package gameMode;
 
+import gameBoard.Board;
+
 /**
  * Total team mode for 4-6 players.
  *
@@ -7,8 +9,13 @@ package gameMode;
  * @version 2021-08-23
  */
 public class TotalTeam extends Basic {
+    // Parameters
 
-    public TotalTeam(int playerCount) {
-        super(playerCount);
+    // Constructors
+    public TotalTeam(Board gameBoard, int playerCount) {
+        super(gameBoard, playerCount);
     }
+
+    // Methods
+
 }

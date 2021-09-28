@@ -11,11 +11,17 @@ import java.util.ArrayList;
 public class Player {
     // Parameters
     /**
+     * @param playerId the players id
+     */
+    private int playerId;
+    /**
+     * @param amountCapturedHats amount of hats that have been captured
+     */
+    private int amountCapturedHats;
+    /**
      * @param activeHats amount of active hats
      */
     private int activeHats;
-
-    private int id;
 
     private ArrayList<Hat> allHats;
 
@@ -23,17 +29,39 @@ public class Player {
     /**
      * Constructor to create a player.
      */
-    public Player(int activeHats, int id) {
+    public Player(int playerId, int activeHats) {
         this.activeHats = activeHats;
-        this.id = id;
+        this.playerId = playerId;
         this.allHats = createHats();
+    }
+
+    // Methods
+    /**
+     * Getter for playerId.
+     * @return playerId
+     */
+    public int getPlayerId() {
+        return playerId;
+    }
+
+    /**
+     * Getter for allHats.
+     * @return allHats
+     */
+    public ArrayList<Hat> getAllHats() {
+        return this.allHats;
     }
 
     private ArrayList<Hat> createHats() {
         ArrayList<Hat> hats = new ArrayList<>();
         for(int i = 1; i <= activeHats; i++) {
-            hats.add(new Hat(i,id));
+            hats.add(new Hat(i, playerId));
         }
         return hats;
     }
+
+    public void increaseAmountCapturedHats() {
+        amountCapturedHats += 1;
+    }
+
 }
