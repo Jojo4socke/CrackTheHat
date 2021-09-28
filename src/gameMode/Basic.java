@@ -74,15 +74,18 @@ public class Basic {
         }
 
         if(isSaveField(currentField)) {
-            if(((SaveField) currentField).countGamePieces() <= 3) {
+            if(((SaveField) currentField).joinField() == true) {
                 return currentField;
             } else {
-                System.out.println("Move not possible. Try again.");
+                System.out.println("Try again.");
                 return moveGamePiece(startField, currentHat, eyes);
             }
         } else {
             // change
             catchTheVictim(currentField, currentHat);
+        }
+        if(isSaveField(startField)) {
+            ((SaveField) startField).leaveField();
         }
         return currentField;
     }
@@ -102,7 +105,7 @@ public class Basic {
         int nextFieldNumber;
         // Choose direction
         if(nextPossibleFields.size() > 1) {
-            System.out.println("Possible moves to " + currentField.getNeighbours());
+            System.out.println("Possible moves to: " + nextPossibleFields.toString());
             System.out.print("Choose a number from above: ");
             nextFieldNumber = input.nextInt();
         } else {

@@ -39,11 +39,13 @@ public class SaveField extends Field {
     /**
      * Game piece joins field to rest.
      */
-    public void joinField() {
+    public boolean joinField() {
         if(restingGamePieces < maxGamePieces) {
             restingGamePieces++;
+            return true;
         } else {
             System.out.println("Resting not possible!");
+            return false;
         }
     }
 
