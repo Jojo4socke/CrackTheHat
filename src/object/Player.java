@@ -1,5 +1,6 @@
 package object;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 /**
@@ -25,13 +26,16 @@ public class Player {
 
     private ArrayList<Hat> allHats;
 
+    private Color playerColor;
+
     // Constructors
     /**
      * Constructor to create a player.
      */
-    public Player(int playerId, int activeHats) {
+    public Player(int playerId, int activeHats, Color color) {
         this.activeHats = activeHats;
         this.playerId = playerId;
+        this.playerColor = color;
         this.allHats = createHats();
     }
 
@@ -55,7 +59,7 @@ public class Player {
     private ArrayList<Hat> createHats() {
         ArrayList<Hat> hats = new ArrayList<>();
         for(int i = 1; i <= activeHats; i++) {
-            hats.add(new Hat(i, playerId));
+            hats.add(new Hat(i, playerId, this));
         }
         return hats;
     }
@@ -64,4 +68,7 @@ public class Player {
         amountCapturedHats += 1;
     }
 
+    public Color getPlayerColor() {
+        return playerColor;
+    }
 }

@@ -2,7 +2,6 @@ package object;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 //TODO
 // -Player position on board (kinda implemented)
 // - updates on captured hats
@@ -19,11 +18,26 @@ public class Hat extends JFrame {
      * @param capturedHats list of all hats that are currently captured by the hat
      */
     private ArrayList<Hat> capturedHats;
-    String hatColour;
-    String numCapturedHats;
+    Color hatColour;
+    int amountCapturedHats;
     int hatPosition = 0; // needs to be replaced with starting field
     Player player;
     int maxField = 75;
+
+    public Hat(int hatCaptures, int eyes, Player player){
+        // create JFrame can be removed later, probably (hopefully)
+        setTitle("Hat");
+        setSize(400, 400);
+        setVisible(true);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        // pass params
+        this.hatColour = player.getPlayerColor();
+        this.amountCapturedHats = hatCaptures;
+        this.hatPosition = getHatPosition();
+        onRoll(eyes);
+        this.player = player;
+
+    }
 
     private void createPlayerHat(Graphics g, Color colorPlayer) {
         Graphics2D g2d = (Graphics2D) g;
@@ -31,43 +45,18 @@ public class Hat extends JFrame {
         g2d.fillOval(150, 150, 100, 100);
     }
 
-    private void createCapturedHatsString(Graphics g, String capturedHats){
+    private void createCapturedHatsString(Graphics g, int capturedHats){
         Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(Color.BLACK);
         g.setFont(new Font("TimesRoman", Font.BOLD, 50));
-        g2d.drawString(capturedHats, 185, 210);
-
-    }
-
-    private Hat(String color, String hatCaptures, int eyes, Player player){
-        // create JFrame can be removed later, probably
-        setTitle("Hat");
-        setSize(400, 400);
-        setVisible(true);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        // pass params
-        this.hatColour = color;
-        this.numCapturedHats = hatCaptures;
-        this.hatPosition = getHatPosition();
-        onRoll(eyes);
-        this.player = player;
+        g2d.drawString(Integer.toString(capturedHats), 185, 210);
 
     }
 
     @Override
     public void paint(Graphics g) {
-        // map colours to Color Object to change colour of Player
-        HashMap<String, Color> colourMapper = new HashMap<>();
-
-        colourMapper.put("blue", Color.blue);
-        colourMapper.put("yellow", Color.yellow);
-        colourMapper.put("green", Color.green);
-        colourMapper.put("pink", Color.pink);
-        colourMapper.put("orange", Color.orange);
-        colourMapper.put("magenta", Color.magenta);
-
-        createPlayerHat(g, colourMapper.get(hatColour));
-        createCapturedHatsString(g,numCapturedHats);
+        createPlayerHat(g, hatColour);
+        createCapturedHatsString(g, amountCapturedHats);
     }
 
     public int getHatPosition(){
@@ -91,11 +80,16 @@ public class Hat extends JFrame {
         // testing
         // creating multiple hats
         Hat[] obj = new Hat[5];
-        obj[0] = new Hat("blue","1",0,new Player(1, 4));
-        obj[1] = new Hat("magenta","2",0,new Player(2, 4));
-        obj[2] = new Hat("orange","3",0,new Player(3, 4));
-        obj[3] = new Hat("pink","4",0,new Player(4, 4));
-        obj[4] = new Hat("green","5",0,new Player(5, 4));
+        obj[0] = new Hat(1,0,
+                new Player(1, 4, Color.blue));
+        obj[1] = new Hat(2,0,
+                new Player(2, 4, Color.magenta));
+        obj[2] = new Hat(3,0,
+                new Player(3, 4, Color.orange));
+        obj[3] = new Hat(4,0,
+                new Player(4, 4, Color.pink));
+        obj[4] = new Hat(5,0,
+                new Player(5, 4, Color.green));
         //Hat crackHat = new Hat("magenta","6",0, 1);
         System.out.println("start");
         // simulating dice throws
