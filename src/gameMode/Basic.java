@@ -82,7 +82,7 @@ public class Basic {
             }
         } else {
             // change
-            catchTheVictim(currentField, currentHat);
+            //catchTheVictim(currentField, currentHat, );
         }
         if(isSaveField(startField)) {
             ((SaveField) startField).leaveField();
@@ -157,16 +157,16 @@ public class Basic {
 
     /**
      * Try to catch the victim.
-     * A victim can be caught, if the attacker will finish his move on the victims field.
-     * If the victim is located on a save field it's not possible to catch it.
-     * @param field current field
-     * @param attacker game piece that joins the field
+     * A victim can be caught, if the attacker will finish his move on the victims currentField.
+     * If the victim is located on a save currentField it's not possible to catch it.
+     * @param currentField current currentField
+     * @param attacker game piece that joins the currentField
      */
-    private boolean catchTheVictim(Field field, Hat attacker, List<Hat> hats) {
-        if(!isSaveField(field)) {
+    private boolean catchTheVictim(Field currentField, Hat attacker, List<Hat> hats) {
+        if(!isSaveField(currentField)) {
             Hat victim = null;
             for(Hat element : hats) {
-                if(element.getHatPosition() == field.getFieldNumber()) {
+                if(element.getHatPosition() == currentField.getFieldNumber()) {
                     victim = element;
                 }
             }

@@ -4,6 +4,7 @@ import gameBoard.Board;
 import gameMode.*;
 import object.Player;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -39,11 +40,12 @@ public class Game {
      * Contructor to create a game.
      * @param playerCount number of players to start the game
      */
-    public Game(int playerCount, String gameMode) {
+    public Game(int playerCount, String gameMode, ArrayList<Color> playerColours) {
         gameBoard = new Board();
         this.playerCount = playerCount;
         this.gameMode = changeGameMode(gameMode, gameBoard);
-        players = createPlayers(playerCount);
+        playerColours.add(Color.blue);
+        players = createPlayers(playerCount, playerColours);
 
 
         //TODO: create hats
@@ -57,13 +59,15 @@ public class Game {
      * Gameplay with queries for the players.
      */
     public static void runGame() {
-        Scanner sc= new Scanner(System.in);
-        System.out.print("How many players are playing?: ");
-        String playerCount = sc.nextLine();
-        System.out.print("Which Gamemode?: ");
-        String gameMode = sc.nextLine();
-        Game game = new Game(Integer.parseInt(playerCount), gameMode);
-        System.out.println(game);
+//        Scanner sc= new Scanner(System.in);
+//        System.out.print("How many players are playing?: ");
+//        String playerCount = sc.nextLine();
+//        System.out.print("Which Gamemode?: ");
+//        String gameMode = sc.nextLine();
+//        Game game = new Game(Integer.parseInt(playerCount), gameMode);
+//        System.out.println(game);
+        MainMenu window = new MainMenu();
+        window.showMainMenu();
     }
 
     /**
@@ -74,10 +78,10 @@ public class Game {
 
     }
 
-    private ArrayList<Player> createPlayers(int playerCount) {
+    private ArrayList<Player> createPlayers(int playerCount, ArrayList<Color> playerColours) {
         ArrayList<Player> players = new ArrayList<>();
         for(int i = 1; i <= playerCount; i++) {
-            players.add(new Player(i, gameMode.getMaxHats()));
+            players.add(new Player(i, gameMode.getMaxHats(), playerColours.get(i)));
         }
         return players;
     }
