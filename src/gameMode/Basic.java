@@ -6,9 +6,7 @@ import gameBoard.field.SaveField;
 import object.Hat;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
 
 /**
  * Normal game for 2-6 players.
@@ -81,12 +79,12 @@ public class Basic {
                 return moveGamePiece(startField, currentHat, eyes);
             }
         } else {
-            // change
-            //catchTheVictim(currentField, currentHat, );
+            catchTheVictim(currentField, currentHat);
         }
         if(isSaveField(startField)) {
-            ((SaveField) startField).leaveField();
+            ((SaveField) startField).leaveField(currentHat);
         }
+        startField.removeHat(currentHat);
         return currentField;
     }
 
@@ -162,14 +160,9 @@ public class Basic {
      * @param currentField current currentField
      * @param attacker game piece that joins the currentField
      */
-    private boolean catchTheVictim(Field currentField, Hat attacker, List<Hat> hats) {
-        if(!isSaveField(currentField)) {
-            Hat victim = null;
-            for(Hat element : hats) {
-                if(element.getHatPosition() == currentField.getFieldNumber()) {
-                    victim = element;
-                }
-            }
+    private boolean catchTheVictim(Field currentField, Hat attacker) {
+        if(!isSaveField(currentField) && currentField.getHats() != null) {
+            Hat victim = currentField.getHats().get(0);
             attacker.addVictim(victim);
             victim.setCaptured(true);
             return true;
@@ -183,7 +176,7 @@ public class Basic {
         return this.getClass().getName() + "{" +
                 "  maxHats=" + getMaxHats() +
                 ", playerCount=" + getPlayers() +
-                '}';
+                "}";
     }
 
 }

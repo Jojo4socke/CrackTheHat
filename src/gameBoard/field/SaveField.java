@@ -1,5 +1,7 @@
 package gameBoard.field;
 
+import object.Hat;
+
 /**
  * A resting field on the game board.
  * Up to three hats or towers are save and can't be captured.
@@ -40,8 +42,7 @@ public class SaveField extends Field {
      * Game piece joins field to rest.
      */
     public boolean joinField() {
-        if(restingGamePieces < maxGamePieces) {
-            restingGamePieces++;
+        if(getHats().size() < maxGamePieces) {
             return true;
         } else {
             System.out.println("Resting not possible!");
@@ -52,8 +53,8 @@ public class SaveField extends Field {
     /**
      * Game piece leaves resting field.
      */
-    public void leaveField() {
-        restingGamePieces--;
+    public void leaveField(Hat hat) {
+        removeHat(hat);
     }
 
     @Override

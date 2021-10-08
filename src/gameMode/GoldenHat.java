@@ -28,7 +28,7 @@ public class GoldenHat extends Basic {
                 "  maxHats=" + getMaxHats() +
                 ", playerCount=" + getPlayers() +
                 ", goldenHatOwner=" + goldenHatOwner.getPlayerId() +
-                '}';
+                "}";
     }
 
 }

@@ -6,7 +6,6 @@ import object.Player;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Creates a game board and starts the game.
@@ -20,10 +19,6 @@ public class Game {
      * @param gameBoard the game board
      */
     private Board gameBoard;
-    /**
-     * @param playerCount number of players
-     */
-    private int playerCount;
     /**
      * @param players list of players who participate in the game
      */
@@ -42,10 +37,9 @@ public class Game {
      */
     public Game(int playerCount, String gameMode, ArrayList<Color> playerColours) {
         gameBoard = new Board();
-        this.playerCount = playerCount;
-        this.gameMode = changeGameMode(gameMode, gameBoard);
         playerColours.add(Color.blue);
-        players = createPlayers(playerCount, playerColours);
+        this.players = createPlayers(playerCount, playerColours);
+        this.gameMode = changeGameMode(gameMode, gameBoard);
 
 
         //TODO: create hats
@@ -89,27 +83,41 @@ public class Game {
     private Basic changeGameMode(String gameModeTitle, final Board gameBoard) {
         switch (gameModeTitle) {
             case "Basic":
-                gameMode = new Basic(gameBoard, playerCount);
+                gameMode = new Basic(gameBoard, players.size());
                 break;
             case "GoldenHat":
-                gameMode = new GoldenHat(gameBoard, playerCount);
+                gameMode = new GoldenHat(gameBoard, players.size());
                 break;
             case "Team":
-                gameMode = new Team(gameBoard, playerCount);
+                gameMode = new Team(gameBoard, players.size());
                 break;
             case "TotalTeam":
-                gameMode = new TotalTeam(gameBoard, playerCount);
+                gameMode = new TotalTeam(gameBoard, players.size());
                 break;
             case "Tower":
-                gameMode = new Tower(gameBoard, playerCount);
+                gameMode = new Tower(gameBoard, players.size());
                 break;
         }
         return gameMode;
     }
 
+    private String printPlayers() {
+        String playerString = null;
+        for (int i = 0; i < players.size(); i++) {
+            playerString += players.get(i).toString();
+            if(!(i == players.size() - 1)) {
+                playerString += ", ";
+            }
+        }
+        return playerString;
+    }
+
+    @Override
     public String toString() {
-        return "PlayerCount: " + playerCount + "\n gameMode: "
-                + gameMode.toString() + "\n Players: " + players.toString();
+        return "##############################\n"
+                + "GameMode: " + gameMode.toString() + "\n"
+                + "Players:  " + printPlayers() + "\n"
+                + "##############################\n";
     }
 
 }

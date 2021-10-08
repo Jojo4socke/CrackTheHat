@@ -1,7 +1,8 @@
 package gameBoard.field;
 
 import java.util.ArrayList;
-import java.util.Set;
+
+import object.Hat;
 
 /**
  * A field on the game board.
@@ -19,6 +20,10 @@ public class Field {
      * @param neighbours the fields neighbours
      */
     private ArrayList<Integer> neighbours;
+    /**
+     * @param hats game pieces that stand on the field
+     */
+    private ArrayList<Hat> hats;
 
     // Constructors
     /**
@@ -44,6 +49,28 @@ public class Field {
      */
     public ArrayList<Integer> getNeighbours() {
         return neighbours;
+    }
+
+    /**
+     * Getter for hat.
+     * @return hat on this field
+     */
+    public ArrayList<Hat> getHats() {
+        return hats;
+    }
+
+    /**
+     * Add a hat to the field.
+     */
+    public void addHat(Hat hat) {
+        hats.add(hat);
+    }
+
+    /**
+     * Remove a hat from the field.
+     */
+    public void removeHat(Hat hat) {
+        hats.remove(hat);
     }
 
     /**

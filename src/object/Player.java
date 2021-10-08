@@ -71,4 +71,9 @@ public class Player {
     public Color getPlayerColor() {
         return playerColor;
     }
+
+    @Override
+    public String toString() {
+        return playerColor + "(ID: " + playerId + ")";
+    }
 }
