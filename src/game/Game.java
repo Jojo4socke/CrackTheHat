@@ -66,8 +66,8 @@ public class Game {
 //        String gameMode = sc.nextLine();
 //        Game game = new Game(Integer.parseInt(playerCount), gameMode);
 //        System.out.println(game);
-        MainMenu window = new MainMenu();
-        window.showMainMenu();
+        MainMenu mainMenu = new MainMenu();
+        mainMenu.tick();
     }
 
     /**
@@ -110,6 +110,10 @@ public class Game {
     public String toString() {
         return "PlayerCount: " + playerCount + "\n gameMode: "
                 + gameMode.toString() + "\n Players: " + players.toString();
+    }
+
+    public void render() {
+
     }
 
 }
