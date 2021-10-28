@@ -1,6 +1,6 @@
 package gameBoard.field;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import object.Hat;
 
@@ -19,11 +19,11 @@ public class Field {
     /**
      * @param neighbours the fields neighbours
      */
-    private ArrayList<Integer> neighbours;
+    private List<Integer> neighbours;
     /**
-     * @param hats game pieces that stand on the field
+     * @param hats game pieces located on the field
      */
-    private ArrayList<Hat> hats;
+    private List<Hat> hats;
 
     // Constructors
     /**
@@ -36,7 +36,7 @@ public class Field {
 
     // Methods
     /**
-     * Getter for fieldNumer.
+     * Getter for th fields number.
      * @return unique field number
      */
     public int getFieldNumber() {
@@ -47,29 +47,30 @@ public class Field {
      * Getter for the fields neighbours.
      * @return list of neighbours
      */
-    public ArrayList<Integer> getNeighbours() {
+    public List<Integer> getNeighbours() {
         return neighbours;
     }
 
     /**
-     * Getter for hat.
-     * @return hat on this field
+     * Getter for hats located on the field.
+     * @return list of hats on the field
      */
-    public ArrayList<Hat> getHats() {
+    public List<Hat> getHats() {
         return hats;
     }
 
     /**
-     * Add a hat to the field.
+     * Let a specific game piece join the field.
      */
-    public void addHat(Hat hat) {
+    public boolean joinField(Hat hat) {
         hats.add(hat);
+        return true;
     }
 
     /**
-     * Remove a hat from the field.
+     * Remove a specific game piece from the field.
      */
-    public void removeHat(Hat hat) {
+    public void leaveField(Hat hat) {
         hats.remove(hat);
     }
 
@@ -82,11 +83,10 @@ public class Field {
     }
 
     /**
-     * Calculate neighbours.
-     * --> 2-4 player game mode
+     * Calculate neighbours for 2-4 player game mode.
      */
-    private ArrayList<Integer> calculatePreviousNextField4P() {
-        ArrayList<Integer> sourroundingFields = null;
+    private List<Integer> calculatePreviousNextField4P() {
+        List<Integer> sourroundingFields = null;
         if((fieldNumber > 0 && fieldNumber < 51)
                 || (fieldNumber > 52 && fieldNumber < 58)
                 || (fieldNumber > 59 && fieldNumber < 64)
@@ -114,8 +114,7 @@ public class Field {
     }
 
     /**
-     * Add neighbours for crossings etc.
-     * --> 2-4 player game mode
+     * Add neighbours crossings for 2-4 player game mode.
      */
     private void addMoreSourroundingFields4P() {
         switch(fieldNumber) {

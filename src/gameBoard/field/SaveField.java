@@ -31,30 +31,24 @@ public class SaveField extends Field {
 
     // Methods
     /**
-     * Get amount of game pieces that are currently resting on the field.
-     * @return amount of game pieces
+     * Get amount of maximum game pieces that can rest on the field.
+     * @return maximum of game pieces which can rest on the field
      */
-    public int countGamePieces() {
-        return restingGamePieces;
+    public int getMaxGamePieces() {
+        return maxGamePieces;
     }
 
     /**
      * Game piece joins field to rest.
      */
-    public boolean joinField() {
+    @Override
+    public boolean joinField(Hat hat) {
         if(getHats().size() < maxGamePieces) {
-            return true;
+            return super.joinField(hat);
         } else {
-            System.out.println("Resting not possible!");
+            System.out.println("Maximum of game pieces resting!");
             return false;
         }
-    }
-
-    /**
-     * Game piece leaves resting field.
-     */
-    public void leaveField(Hat hat) {
-        removeHat(hat);
     }
 
     @Override

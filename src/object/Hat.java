@@ -1,7 +1,7 @@
 package object;
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.List;
 //TODO
 // -Player position on board (kinda implemented)
 // - updates on captured hats
@@ -11,102 +11,144 @@ import java.util.ArrayList;
 
 public class Hat extends JFrame {
     /**
-     * @param isCaptured indicates whether this hat is captured or not
+     * @param player owner of the hat
+     */
+    Player player;
+    /**
+     * @param hatNumber player's unique hat number
+     */
+    int hatNumber;
+    /**
+     * @param isCaptured indicates whether the hat is captured (true) or free (false)
      */
     boolean isCaptured;
     /**
      * @param capturedHats list of all hats that are currently captured by the hat
      */
-    private ArrayList<Hat> capturedHats;
-    Color hatColour;
-    int amountCapturedHats;
-    int hatPosition = 0; // needs to be replaced with starting field
-    Player player;
-    int maxField = 75;
+    private List<Hat> capturedHats;
 
-    public Hat(int hatCaptures, int eyes, Player player){
+    // Constructors
+    /**
+     * Constrcutor to create a hat.
+     * @param hatNumber player's unique hat number
+     * @param player owner of the hat
+     */
+    public Hat(int hatNumber, Player player){
+        this.hatNumber = hatNumber;
+        this.player = player;
         // create JFrame can be removed later, probably (hopefully)
         setTitle("Hat");
         setSize(400, 400);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        // pass params
-        this.hatColour = player.getPlayerColor();
-        this.amountCapturedHats = hatCaptures;
-        this.hatPosition = getHatPosition();
-        onRoll(eyes);
-        this.player = player;
-
     }
 
-    private void createPlayerHat(Graphics g, Color colorPlayer) {
+    // Methods
+    /**
+     * Create a visual hat on the board.
+     * @param g basic renderer for drawing
+     */
+    private void createPlayerHat(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setColor(colorPlayer);
+        g2d.setColor(player.getPlayerColor());
         g2d.fillOval(150, 150, 100, 100);
     }
 
-    private void createCapturedHatsString(Graphics g, int capturedHats){
+    /**
+     * Create the captured hats below the player's hat.
+     * @param g basic renderer for drawing
+     */
+    private void createCapturedHatsString(Graphics g){
         Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(Color.BLACK);
         g.setFont(new Font("TimesRoman", Font.BOLD, 50));
-        g2d.drawString(Integer.toString(capturedHats), 185, 210);
+        g2d.drawString(Integer.toString(capturedHats.size()), 185, 210);
 
     }
 
+    /**
+     * Draw the player's hat with it's captured victims below.
+     * @param g basic renderer for drawing
+     */
     @Override
     public void paint(Graphics g) {
-        createPlayerHat(g, hatColour);
-        createCapturedHatsString(g, amountCapturedHats);
+        createPlayerHat(g);
+        createCapturedHatsString(g);
     }
 
-    public int getHatPosition(){
-        return hatPosition;
-    }
-
-    private void setHatPosition(int position){
-        this.hatPosition += position;
-    }
-
-    // hat position cant exceed maxField, maxField is 75 on a 4 player board
-    private void onRoll(int eyes){
-        if(eyes + getHatPosition() <= maxField){
-                setHatPosition(eyes);
-        }else{
-            this.hatPosition = 0;
-        }
-    }
-
+    /**
+     * Test Runner.
+     * @param args
+     */
     public static void main(String[] args) {
         // testing
         // creating multiple hats
         Hat[] obj = new Hat[5];
-        obj[0] = new Hat(1,0,
+        obj[0] = new Hat(1,
                 new Player(1, 4, Color.blue));
-        obj[1] = new Hat(2,0,
+        obj[1] = new Hat(2,
                 new Player(2, 4, Color.magenta));
-        obj[2] = new Hat(3,0,
+        obj[2] = new Hat(3,
                 new Player(3, 4, Color.orange));
-        obj[3] = new Hat(4,0,
+        obj[3] = new Hat(4,
                 new Player(4, 4, Color.pink));
-        obj[4] = new Hat(5,0,
+        obj[4] = new Hat(5,
                 new Player(5, 4, Color.green));
         //Hat crackHat = new Hat("magenta","6",0, 1);
-        System.out.println("start");
-        // simulating dice throws
-        for (int i = 0; i < obj.length; i++){
-            System.out.println("Position throw " + i + "of " + obj[i].hatColour);
-            obj[i].onRoll(Dice.throwDice());
-            System.out.println(obj[i].getHatPosition());
-        }
     }
 
+    /**
+     * Getter for the player.
+     * @return owner of the hat
+     */
+    public Player getPlayer() {
+        return player;
+    }
+
+    /**
+     * Getter for the hats number.
+     */
+    public int getHatNumber() {
+        return hatNumber;
+    }
+
+    /**
+     * Getter for the hats status.
+     */
+    public boolean getStatus() {
+        return isCaptured;
+    }
+
+    /**
+     * Getter for the list of captured hats.
+     */
+    public List<Hat> getCapturedHats() {
+        return capturedHats;
+    }
+
+    /**
+     * Set the hats status to captured (true) or free (false).
+     * @param captured is the hat captured?
+     */
     public void setCaptured(boolean captured) {
         isCaptured = captured;
     }
 
+    /**
+     * Add the victim to the list of captured hats and increase the amount of captured hats for the player.
+     * @param victim the hat that has been captured
+     */
     public void addVictim(Hat victim) {
         capturedHats.add(victim);
         player.increaseAmountCapturedHats();
+    }
+
+    /**
+     * Store all captured hats and clear the list.
+     */
+    public void storeVictims() {
+        player.increaseAmountStoredHats(capturedHats.size());
+        capturedHats.clear();
     }
 
 }

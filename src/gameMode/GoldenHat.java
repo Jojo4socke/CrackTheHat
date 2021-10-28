@@ -22,10 +22,14 @@ public class GoldenHat extends Basic {
     }
 
     // Methods
+    /**
+     * Print game settings.
+     * @return game settings
+     */
     @Override
     public String toString() {
         return this.getClass().getName() + "{" +
-                "  maxHats=" + getMaxHats() +
+                "  maxHats=" + getMaxGamePieces() +
                 ", playerCount=" + getPlayers() +
                 ", goldenHatOwner=" + goldenHatOwner.getPlayerId() +
                 "}";
