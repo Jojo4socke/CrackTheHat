@@ -46,7 +46,7 @@ public class TempBoard extends JFrame{
          */
         public Gamefield() {
             Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
-            int heightGame = (int)size.getHeight() - 100;
+            int heightGame = (int)size.getHeight();
             int[] x = new int[4];
             int[] y = new int[4];
             x[0] = heightGame/25;
@@ -168,7 +168,7 @@ public class TempBoard extends JFrame{
                 y[3] -= 50;
             }
 
-            //Middle Field
+            //TOP RIGHT MIDDLE
             x[0] = heightGame/7 + 6 * 50;
             x[1] = heightGame/7 + 6 * 50-50;
             x[2] = heightGame/7 + 6 * 50;
@@ -183,7 +183,6 @@ public class TempBoard extends JFrame{
             fields[52].addPoint(x[2], y[2]);
             fields[52].addPoint(x[3], y[3]);
 
-            //TOP RIGHT MIDDLE
             for(int i=53; i<58; i++){
                 x[1] = x[0];
                 x[2] = x[3];
