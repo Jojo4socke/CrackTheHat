@@ -30,6 +30,7 @@ public class BoardGUI extends JFrame
 
         // why are you resetting the values again instead of setting them more cleverly? Because fuck it, that's why.
         // same goes for the many for loops
+        // i love it xD
         currentX = centerX;
         // array x in negative direction aka left
         ArrayList<ArrayList<Integer>> arrayLeftCoordinates = new ArrayList<>();
@@ -51,7 +52,6 @@ public class BoardGUI extends JFrame
         for(int i = 0; i < innerArrayLength; i++){
             currentY -= squareDimension;
             arrayTopCoordinates.add(new ArrayList<Integer>(Arrays.asList(currentX,currentY)));
-
         }
 
         ArrayList<ArrayList<Integer>> coordinatesArray = new ArrayList<ArrayList<Integer>>(arrayRightCoordinates);
