@@ -2,9 +2,11 @@ package game;
 
 import gameBoard.Board;
 import gameMode.*;
+import object.Hat;
 import object.Player;
 
 import java.awt.*;
+import java.io.CharArrayWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +31,10 @@ public class Game {
      */
     private Player activePlayer;
 
+    private List<Hat> hats;
+
+    private MainMenu mainMenu;
+
     Basic gameMode;
 
     // Constructors
@@ -41,7 +47,8 @@ public class Game {
         playerColours.add(Color.blue);
         this.players = createPlayers(playerCount, playerColours);
         this.gameMode = changeGameMode(gameMode, gameBoard);
-
+        this.hats = createHats(playerCount);
+        this.mainMenu = new MainMenu();
 
         //TODO: create hats
     }
@@ -53,13 +60,14 @@ public class Game {
      * @param args
      */
     public static void main(String[] args) {
-        runGame();
+        Game game = new Game(2,"Basic", new ArrayList<Color>(){{add(Color.orange); add(Color.blue);}});
+        game.runGame();
     }
 
     /**
      * Gameplay with queries for the players.
      */
-    public static void runGame() {
+    public void runGame() {
 //        Scanner sc= new Scanner(System.in);
 //        System.out.print("How many players are playing?: ");
 //        String playerCount = sc.nextLine();
@@ -67,15 +75,20 @@ public class Game {
 //        String gameMode = sc.nextLine();
 //        Game game = new Game(Integer.parseInt(playerCount), gameMode);
 //        System.out.println(game);
-        MainMenu mainMenu = new MainMenu();
-        mainMenu.tick();
+        while (true) {
+            tick();
+        }
+    }
+
+    private void tick() {
+        mainMenu.showMainMenu();
     }
 
     /**
      * Choose the next player.
      * @param activePlayer player's turn
      */
-    private void nextTurn(int activePlayer) {
+    public void nextTurn(int activePlayer) {
 
     }
 
@@ -91,6 +104,14 @@ public class Game {
             players.add(new Player(i, gameMode.getMaxGamePieces(), playerColours.get(i)));
         }
         return players;
+    }
+
+    private List<Hat> createHats(int playercount) {
+        List<Hat> hats = new ArrayList<>();
+        for(int i = 0; i <= playercount; i++) {
+            hats.add(new Hat(i, players.get(i)));
+        }
+        return hats;
     }
 
     /**
