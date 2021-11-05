@@ -50,7 +50,7 @@ public class Game {
         this.playerCount = playerCount;
         this.gameMode = changeGameMode(gameMode, gameBoard);
         this.players = createPlayers(playerCount, playerColours);
-        this.hats = createHats(playerCount);
+        //this.hats = createHats(playerCount);
         this.mainMenu = new MainMenu();
 
         //TODO: create hats
@@ -76,7 +76,7 @@ public class Game {
         String playerCount = sc.nextLine();
         System.out.print("Which Gamemode?: ");
         String gameMode = sc.nextLine();
-        Game game = new Game(Integer.parseInt(playerCount), gameMode; new ArrayList<Color>(){{add(Color.orange); add(Color.blue);}});
+        Game game = new Game(Integer.parseInt(playerCount), gameMode, new ArrayList<Color>(){{add(Color.orange); add(Color.blue);}});
 //        while (true) {
             tick();
  //       }
@@ -106,17 +106,6 @@ public class Game {
             players.add(new Player(i, gameMode.getMaxGamePieces(), playerColours.get(i)));
         }
         return players;
-    }
-
-    private List<Hat> createHats(int playercount) {
-        List<Hat> hats = new ArrayList<>();
-        for(int i = 1; i < playercount; i++) {
-            for(int x = 0; x < gameMode.getMaxGamePieces(); x++) {
-                hats.add(new Hat(x, players.get(i)));
-            }
-        }
-
-        return hats;
     }
 
     /**
