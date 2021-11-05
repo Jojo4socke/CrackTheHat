@@ -151,4 +151,8 @@ public class Game {
 
     }
 
+    public void render() {
+
+    }
+
 }
