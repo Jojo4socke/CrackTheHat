@@ -81,7 +81,7 @@ public class Game {
     }
 
     private void tick() {
-        mainMenu.showMainMenu();
+        mainMenu.render();
     }
 
     /**
@@ -166,10 +166,6 @@ public class Game {
                 + "GameMode: " + gameMode.toString() + "\n"
                 + "Players:  " + printPlayers() + "\n"
                 + "##############################\n";
-    }
-
-    public void render() {
-
     }
 
     public void render() {
