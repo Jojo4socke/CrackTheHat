@@ -26,6 +26,7 @@ public class Board {
      */
     public Board() {
         allFields = generateBoard();
+        generateNeighbours();
     }
 
     // Methods
@@ -54,7 +55,6 @@ public class Board {
                 board.add(new Field(i));
             }
         }
-        generateNeighbours();
         return board;
     }
 

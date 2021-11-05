@@ -35,6 +35,8 @@ public class Game {
 
     private MainMenu mainMenu;
 
+    private int playerCount;
+
     Basic gameMode;
 
     // Constructors
@@ -45,8 +47,9 @@ public class Game {
     public Game(int playerCount, String gameMode, List<Color> playerColours) {
         gameBoard = new Board();
         playerColours.add(Color.blue);
-        this.players = createPlayers(playerCount, playerColours);
+        this.playerCount = playerCount;
         this.gameMode = changeGameMode(gameMode, gameBoard);
+        this.players = createPlayers(playerCount, playerColours);
         this.hats = createHats(playerCount);
         this.mainMenu = new MainMenu();
 
@@ -75,9 +78,9 @@ public class Game {
 //        String gameMode = sc.nextLine();
 //        Game game = new Game(Integer.parseInt(playerCount), gameMode);
 //        System.out.println(game);
-        while (true) {
+//        while (true) {
             tick();
-        }
+ //       }
     }
 
     private void tick() {
@@ -108,7 +111,7 @@ public class Game {
 
     private List<Hat> createHats(int playercount) {
         List<Hat> hats = new ArrayList<>();
-        for(int i = 0; i <= playercount; i++) {
+        for(int i = 0; i < playercount; i++) {
             hats.add(new Hat(i, players.get(i)));
         }
         return hats;
@@ -123,19 +126,19 @@ public class Game {
     private Basic changeGameMode(String gameModeTitle, final Board gameBoard) {
         switch (gameModeTitle) {
             case "Basic":
-                gameMode = new Basic(gameBoard, players.size());
+                gameMode = new Basic(gameBoard, playerCount);
                 break;
             case "GoldenHat":
-                gameMode = new GoldenHat(gameBoard, players.size());
+                gameMode = new GoldenHat(gameBoard, playerCount);
                 break;
             case "Team":
-                gameMode = new Team(gameBoard, players.size());
+                gameMode = new Team(gameBoard, playerCount);
                 break;
             case "TotalTeam":
-                gameMode = new TotalTeam(gameBoard, players.size());
+                gameMode = new TotalTeam(gameBoard, playerCount);
                 break;
             case "Tower":
-                gameMode = new Tower(gameBoard, players.size());
+                gameMode = new Tower(gameBoard, playerCount);
                 break;
         }
         return gameMode;

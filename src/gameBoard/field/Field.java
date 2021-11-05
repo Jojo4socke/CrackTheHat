@@ -1,5 +1,6 @@
 package gameBoard.field;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import object.Hat;
@@ -86,7 +87,7 @@ public class Field {
      * Calculate neighbours for 2-4 player game mode.
      */
     private List<Integer> calculatePreviousNextField4P() {
-        List<Integer> sourroundingFields = null;
+        List<Integer> sourroundingFields = new ArrayList<>();
         if((fieldNumber > 0 && fieldNumber < 51)
                 || (fieldNumber > 52 && fieldNumber < 58)
                 || (fieldNumber > 59 && fieldNumber < 64)

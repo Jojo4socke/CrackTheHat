@@ -1,6 +1,7 @@
 package object;
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 //TODO
 // -Player position on board (kinda implemented)
@@ -25,7 +26,7 @@ public class Hat extends JFrame {
     /**
      * @param capturedHats list of all hats that are currently captured by the hat
      */
-    private List<Hat> capturedHats;
+    private List<Hat> capturedHats = new ArrayList<>();
 
     // Constructors
     /**
