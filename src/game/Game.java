@@ -9,6 +9,7 @@ import java.awt.*;
 import java.io.CharArrayWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * Creates a game board and starts the game.
@@ -46,7 +47,6 @@ public class Game {
      */
     public Game(int playerCount, String gameMode, List<Color> playerColours) {
         gameBoard = new Board();
-        playerColours.add(Color.blue);
         this.playerCount = playerCount;
         this.gameMode = changeGameMode(gameMode, gameBoard);
         this.players = createPlayers(playerCount, playerColours);
@@ -71,13 +71,12 @@ public class Game {
      * Gameplay with queries for the players.
      */
     public void runGame() {
-//        Scanner sc= new Scanner(System.in);
-//        System.out.print("How many players are playing?: ");
-//        String playerCount = sc.nextLine();
-//        System.out.print("Which Gamemode?: ");
-//        String gameMode = sc.nextLine();
-//        Game game = new Game(Integer.parseInt(playerCount), gameMode);
-//        System.out.println(game);
+        Scanner sc= new Scanner(System.in);
+        System.out.print("How many players are playing?: ");
+        String playerCount = sc.nextLine();
+        System.out.print("Which Gamemode?: ");
+        String gameMode = sc.nextLine();
+        Game game = new Game(Integer.parseInt(playerCount), gameMode; new ArrayList<Color>(){{add(Color.orange); add(Color.blue);}});
 //        while (true) {
             tick();
  //       }
@@ -103,7 +102,7 @@ public class Game {
      */
     private List<Player> createPlayers(int playerCount, List<Color> playerColours) {
         List<Player> players = new ArrayList<>();
-        for(int i = 1; i <= playerCount; i++) {
+        for(int i = 0; i < playerCount; i++) {
             players.add(new Player(i, gameMode.getMaxGamePieces(), playerColours.get(i)));
         }
         return players;
@@ -111,9 +110,12 @@ public class Game {
 
     private List<Hat> createHats(int playercount) {
         List<Hat> hats = new ArrayList<>();
-        for(int i = 0; i < playercount; i++) {
-            hats.add(new Hat(i, players.get(i)));
+        for(int i = 1; i < playercount; i++) {
+            for(int x = 0; x < gameMode.getMaxGamePieces(); x++) {
+                hats.add(new Hat(x, players.get(i)));
+            }
         }
+
         return hats;
     }
 
