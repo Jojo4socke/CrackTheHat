@@ -78,27 +78,6 @@ public class Hat extends JFrame {
     }
 
     /**
-     * Test Runner.
-     * @param args
-     */
-    public static void main(String[] args) {
-        // testing
-        // creating multiple hats
-        Hat[] obj = new Hat[5];
-        obj[0] = new Hat(1,
-                new Player(1, 4, Color.blue));
-        obj[1] = new Hat(2,
-                new Player(2, 4, Color.magenta));
-        obj[2] = new Hat(3,
-                new Player(3, 4, Color.orange));
-        obj[3] = new Hat(4,
-                new Player(4, 4, Color.pink));
-        obj[4] = new Hat(5,
-                new Player(5, 4, Color.green));
-        //Hat crackHat = new Hat("magenta","6",0, 1);
-    }
-
-    /**
      * Getter for the player.
      * @return owner of the hat
      */
