@@ -1,7 +1,9 @@
 package gameBoard;
 
 import gameBoard.field.Field;
+import gameBoard.field.HomeField;
 import gameBoard.field.HomeFieldTest;
+import gameBoard.field.SaveField;
 import gameBoard.field.SaveFieldTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -27,8 +29,8 @@ class BoardTest {
     @Test
     @DisplayName("Verify different field types.")
     void verifyFieldTypes() {
-        assertEquals(HomeFieldTest.class, board.getAllFields().get(77).getClass());
-        assertEquals(SaveFieldTest.class, board.getAllFields().get(10).getClass());
+        assertEquals(HomeField.class, board.getAllFields().get(77).getClass());
+        assertEquals(SaveField.class, board.getAllFields().get(10).getClass());
         assertEquals(Field.class, board.getAllFields().get(71).getClass());
     }
 }

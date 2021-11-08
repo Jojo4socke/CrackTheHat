@@ -141,13 +141,15 @@ public class Hat extends JFrame {
         player.increaseAmountStoredHats(capturedHats.size());
         capturedHats.clear();
     }
+
     // getter hatPosition defaults to zero as I don't know yet where hats are stored
     // if they are not on the field
     public int getHatPosition() {
         return hatPosition;
     }
+
     // used to set position of hat
-    private void setHatPosition(int position){
+    public void setHatPosition(int position) {
         this.hatPosition = position;
     }
 

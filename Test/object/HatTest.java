@@ -15,15 +15,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @version 2021-11-05
  */
 public class HatTest {
-    private Hat hat1;
-    private Hat hat2;
+    private Hat attacker;
+    private Hat victim;
     private Player player1;
     private Player player2;
 
     @BeforeEach
     void setUp() {
-        hat1 = new Hat(1, new Player(1, 1, Color.BLUE));
-        hat2 = new Hat(2, new Player(2, 1, Color.RED));
+        attacker = new Hat(1, new Player(1, 1, Color.BLUE));
+        victim = new Hat(2, new Player(2, 1, Color.RED));
         player1 = new Player(3, 4, Color.BLACK);
         player2 = new Player(4, 4, Color.YELLOW);
     }
@@ -31,7 +31,7 @@ public class HatTest {
     @Test
     @DisplayName("Catch a victim")
     void catchVictim() {
-        hat1.addVictim(hat2);
-        assertTrue(hat1.getCapturedHats().contains(hat2));
+        attacker.addVictim(victim);
+        assertTrue(attacker.getCapturedHats().contains(victim));
     }
 }
