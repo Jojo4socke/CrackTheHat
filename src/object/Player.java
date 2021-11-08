@@ -65,7 +65,7 @@ public class Player {
      * @return activeHats
      */
     public List<Hat> getActiveHats() {
-        return activeHats;
+        return new ArrayList<>(activeHats);
     }
 
     /**

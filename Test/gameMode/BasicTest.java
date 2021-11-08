@@ -4,7 +4,6 @@ import java.awt.*;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
-import com.sun.xml.internal.fastinfoset.tools.TransformInputOutput;
 import gameBoard.Board;
 import gameBoard.field.Field;
 import object.Hat;

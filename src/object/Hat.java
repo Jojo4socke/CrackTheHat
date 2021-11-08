@@ -124,7 +124,7 @@ public class Hat extends JFrame {
      * Getter for the list of captured hats.
      */
     public List<Hat> getCapturedHats() {
-        return capturedHats;
+        return new ArrayList<>(capturedHats);
     }
 
     /**
