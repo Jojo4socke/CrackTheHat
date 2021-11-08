@@ -4,6 +4,8 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import gameBoard.field.HomeField;
+
 /**
  * Player that participates in the game.
  *
@@ -20,6 +22,10 @@ public class Player {
      * @param playerColor the player's color
      */
     private Color playerColor;
+    /**
+     * @param homeField player's home field
+     */
+    private int homeField;
     /**
      * @param activeHats amount of active hats
      */
@@ -61,6 +67,14 @@ public class Player {
     }
 
     /**
+     * Getter for player's home field.
+     * @return homeField
+     */
+    public int getHomeField() {
+        return homeField;
+    }
+
+    /**
      * Getter for player's active hats.
      * @return activeHats
      */
@@ -82,6 +96,10 @@ public class Player {
      */
     public int getAmountStoredHats() {
         return amountStoredHats;
+    }
+
+    public void setHomeField(HomeField homeField) {
+        this.homeField = homeField.getFieldNumber();
     }
 
     /**
