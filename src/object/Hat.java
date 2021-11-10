@@ -27,6 +27,7 @@ public class Hat extends JFrame {
      * @param capturedHats list of all hats that are currently captured by the hat
      */
     private List<Hat> capturedHats = new ArrayList<>();
+    int hatPosition;
 
     // Constructors
     /**
@@ -37,6 +38,7 @@ public class Hat extends JFrame {
     public Hat(int hatNumber, Player player){
         this.hatNumber = hatNumber;
         this.player = player;
+        this.hatPosition = player.getHomeField();
         // create JFrame can be removed later, probably (hopefully)
         setTitle("Hat");
         setSize(400, 400);
@@ -52,7 +54,16 @@ public class Hat extends JFrame {
     private void createPlayerHat(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(player.getPlayerColor());
-        g2d.fillOval(150, 150, 100, 100);
+        //g2d.fillOval(150, 150, 100, 100);
+        paintTriangle(g2d);
+    }
+
+    public void paintTriangle(Graphics g) {
+        int [] x = {50,100,0};
+        int [] y = {0,100,100};
+        g.translate(150, 150);
+        //g.drawPolygon(x, y, 3);
+        g.fillPolygon(x, y, 3);
     }
 
     /**
@@ -63,7 +74,7 @@ public class Hat extends JFrame {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(Color.BLACK);
         g.setFont(new Font("TimesRoman", Font.BOLD, 50));
-        g2d.drawString(Integer.toString(capturedHats.size()), 185, 210);
+        g2d.drawString(Integer.toString(capturedHats.size()), 35, 85);
 
     }
 
@@ -75,27 +86,6 @@ public class Hat extends JFrame {
     public void paint(Graphics g) {
         createPlayerHat(g);
         createCapturedHatsString(g);
-    }
-
-    /**
-     * Test Runner.
-     * @param args
-     */
-    public static void main(String[] args) {
-        // testing
-        // creating multiple hats
-        Hat[] obj = new Hat[5];
-        obj[0] = new Hat(1,
-                new Player(1, 4, Color.blue));
-        obj[1] = new Hat(2,
-                new Player(2, 4, Color.magenta));
-        obj[2] = new Hat(3,
-                new Player(3, 4, Color.orange));
-        obj[3] = new Hat(4,
-                new Player(4, 4, Color.pink));
-        obj[4] = new Hat(5,
-                new Player(5, 4, Color.green));
-        //Hat crackHat = new Hat("magenta","6",0, 1);
     }
 
     /**
@@ -124,7 +114,7 @@ public class Hat extends JFrame {
      * Getter for the list of captured hats.
      */
     public List<Hat> getCapturedHats() {
-        return capturedHats;
+        return new ArrayList<>(capturedHats);
     }
 
     /**
@@ -150,6 +140,17 @@ public class Hat extends JFrame {
     public void storeVictims() {
         player.increaseAmountStoredHats(capturedHats.size());
         capturedHats.clear();
+    }
+
+    // getter hatPosition defaults to zero as I don't know yet where hats are stored
+    // if they are not on the field
+    public int getHatPosition() {
+        return hatPosition;
+    }
+
+    // used to set position of hat
+    public void setHatPosition(int position) {
+        this.hatPosition = position;
     }
 
 }

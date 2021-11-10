@@ -35,7 +35,7 @@ public class Board {
      * @return allFields
      */
     public List<Field> getAllFields() {
-        return allFields;
+        return new ArrayList<>(allFields);
     }
 
     /**
@@ -45,11 +45,11 @@ public class Board {
     public List<Field> generateBoard() {
         //TODO: implement actual board generation
         ArrayList<Field> board = new ArrayList<>();
-        for(int i = 0; i < 80; i++) {
+        for(int i = 0; i <= 80; i++) {
             if (i == 3 || i == 10 || i == 16 || i == 23 || i == 29 || i == 36 ||
                     i == 42 || i == 49 || i == 56 || i == 62 || i == 68 || i == 74) {
                 board.add(new SaveField(i));
-            } else if (i > 75) {
+            } else if (i > 76) {
                 board.add(new HomeField(i));
             } else {
                 board.add(new Field(i));

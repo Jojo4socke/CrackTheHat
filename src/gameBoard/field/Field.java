@@ -24,7 +24,7 @@ public class Field {
     /**
      * @param hats game pieces located on the field
      */
-    private List<Hat> hats;
+    private List<Hat> hats = new ArrayList<>();
 
     // Constructors
     /**
@@ -49,7 +49,7 @@ public class Field {
      * @return list of neighbours
      */
     public List<Integer> getNeighbours() {
-        return neighbours;
+        return new ArrayList<>(neighbours);
     }
 
     /**
@@ -57,7 +57,7 @@ public class Field {
      * @return list of hats on the field
      */
     public List<Hat> getHats() {
-        return hats;
+        return new ArrayList<>(hats);
     }
 
     /**
@@ -65,6 +65,7 @@ public class Field {
      */
     public boolean joinField(Hat hat) {
         hats.add(hat);
+        hat.setHatPosition(fieldNumber);
         return true;
     }
 
