@@ -5,6 +5,7 @@ import gameMode.*;
 import object.Hat;
 import object.Player;
 
+import javax.swing.*;
 import java.awt.*;
 import java.io.CharArrayWriter;
 import java.util.ArrayList;
@@ -36,6 +37,8 @@ public class Game {
 
     private MainMenu mainMenu;
 
+    private JFrame activeWindow;
+
     private int playerCount;
 
     Basic gameMode;
@@ -49,7 +52,7 @@ public class Game {
         gameBoard = new Board();
         this.playerCount = playerCount;
         this.gameMode = changeGameMode(gameMode, gameBoard);
-        this.players = createPlayers(playerCount, playerColours);
+        //this.players = createPlayers(playerCount, playerColours);
         //this.hats = createHats(playerCount);
         this.mainMenu = new MainMenu();
 
@@ -74,16 +77,16 @@ public class Game {
         Scanner sc= new Scanner(System.in);
         System.out.print("How many players are playing?: ");
         String playerCount = sc.nextLine();
-        System.out.print("Which Gamemode?: ");
-        String gameMode = sc.nextLine();
-        Game game = new Game(Integer.parseInt(playerCount), gameMode, new ArrayList<Color>(){{add(Color.orange); add(Color.blue);}});
+//        System.out.print("Which Gamemode?: ");
+//        String gameMode = sc.nextLine();
+        Game game = new Game(Integer.parseInt(playerCount), "Basic", new ArrayList<Color>(){{add(Color.orange); add(Color.blue);}});
 //        while (true) {
             tick();
  //       }
     }
 
     private void tick() {
-        mainMenu.render();
+        mainMenu.tick();
     }
 
     /**

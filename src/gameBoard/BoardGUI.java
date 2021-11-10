@@ -80,7 +80,7 @@ public class BoardGUI extends JFrame
 
     public void paint(Graphics g)
     {
-        super.paint(g);
+        //super.paint(g);
         // initiate and draw center square
         g.drawRect(500,400, squareDimension, squareDimension);
         //draw directional squares

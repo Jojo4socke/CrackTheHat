@@ -23,7 +23,7 @@ public class MainMenu extends JFrame{
         add(panel);
     }
 
-    void render() {
+    private void render() {
         setVisible(true);
         panel.repaint();
     }

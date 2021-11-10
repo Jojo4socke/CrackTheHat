@@ -1,19 +1,25 @@
 package game;
 
+import gameBoard.BoardGUI;
+
 import javax.swing.*;
 
-public class GameScreen extends JFrame {
+public class GameScreen extends MainMenu {
+
+    private BoardGUI boardGUI;
 
     public GameScreen() {
 
     }
 
     public void changeToGameScreen(MainMenu mainMenu) {
-        JLabel label = new JLabel();
-        label.setText("Game is starting");
-        mainMenu.panel.add(label);
         //TODO add GUIBoard to Panel
-        mainMenu.setTitle("Game");
-        mainMenu.tick();
+        this.boardGUI = new BoardGUI();
+        mainMenu.dispose();
+        render();
+    }
+
+    private void render() {
+
     }
 }
