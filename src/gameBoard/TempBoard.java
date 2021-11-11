@@ -32,7 +32,7 @@ public class TempBoard extends JFrame{
      * fields CONTAINS THE MANY DIFFERENT FIELDS FROM THE BOARD
      */
     class Gamefield extends JPanel implements MouseListener{
-        private Polygon[] fields = new Polygon[81];
+        private Polygon[] fields = new Polygon[82];
 
         /**
          * THE GUI RECEIVES A MouseListener TO ALLOW INTERACTION WITH THE GUI
@@ -382,7 +382,13 @@ public class TempBoard extends JFrame{
             fields[80].addPoint(x[2], y[2]);
             fields[80].addPoint(x[3], y[3]);
 
+            System.out.println(x[0]);
+            System.out.println(y[1]);
+
             System.out.println(fields[0].getBounds());
+
+            //DICE FIELD
+            //TODO
 
             addMouseListener(this);
             setPreferredSize(new Dimension(heightGame+325, heightGame-100));
@@ -398,6 +404,9 @@ public class TempBoard extends JFrame{
         public void paintComponent(Graphics g){
             Graphics2D g2d = (Graphics2D)g;
             boolean isColorField = false;
+
+            Dimension wSize = getSize();
+            g2d.drawRect(wSize.width/100, wSize.height/100, wSize.width/2, wSize.height/2);
 
             for(int i = 0; i < fields.length; i++){
                 if(i == 0 || i == 77){
