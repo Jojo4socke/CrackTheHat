@@ -2,9 +2,7 @@ package gameBoard;
 
 import gameBoard.field.Field;
 import gameBoard.field.HomeField;
-import gameBoard.field.HomeFieldTest;
 import gameBoard.field.SaveField;
-import gameBoard.field.SaveFieldTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
