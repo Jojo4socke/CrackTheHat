@@ -1,5 +1,7 @@
 package gameBoard.field;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +13,7 @@ import object.Hat;
  * @author Cedric Nees, Daniel Schedek, Dominik Vennegeerts, Jonathan Uhlmann, Vanessa Grauer
  * @version 2021-08-23
  */
-public class Field {
+public class Field extends JPanel {
     // Parameters
     /**
      * @param fieldNumber unique field number
@@ -25,6 +27,14 @@ public class Field {
      * @param hats game pieces located on the field
      */
     private List<Hat> hats = new ArrayList<>();
+    /**
+     * @param polygon the coordinates on the game field
+     */
+    private Polygon polygon;
+    /**
+     * @param fieldColor the fields color
+     */
+    private Color fieldColor;
 
     // Constructors
     /**
@@ -33,6 +43,8 @@ public class Field {
      */
     public Field(int fieldNumber) {
         this.fieldNumber = fieldNumber;
+        this.polygon = new Polygon();
+        this.fieldColor = Color.WHITE;
     }
 
     // Methods
@@ -58,6 +70,54 @@ public class Field {
      */
     public List<Hat> getHats() {
         return new ArrayList<>(hats);
+    }
+
+    /**
+     * Getter for coordinates.
+     * @return polygon with coordinates
+     */
+    public Polygon getCoordinates() {
+        return this.polygon;
+    }
+
+    /**
+     * Getter for field color.
+     * @return the fields color
+     */
+    public Color getFieldColor() {
+        return this.fieldColor;
+    }
+
+    /**
+     * Setter for coordinates.
+     */
+    public void setCoordinates(int[] x, int[] y) {
+        for(int i = 0; i < 4; i++) {
+            polygon.addPoint(x[i], y[i]);
+        }
+    }
+
+    /**
+     * Setter for fieldColor.
+     */
+    void setFieldColor(Color fieldColor) {
+        this.fieldColor = fieldColor;
+    }
+
+    /**
+     * Create a visual field on the board.
+     * @param g basic renderer for drawing
+     */
+    @Override
+    public void paint(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setColor(Color.BLACK);
+        g2d.draw(getCoordinates());
+        if(!this.getFieldColor().equals(Color.WHITE)){
+            g2d.fillPolygon(getCoordinates());
+        }
+        g2d.draw(getCoordinates());
+        setVisible(true);
     }
 
     /**

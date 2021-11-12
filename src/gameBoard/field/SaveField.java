@@ -1,5 +1,7 @@
 package gameBoard.field;
 
+import java.awt.Color;
+
 import object.Hat;
 
 /**
@@ -27,6 +29,7 @@ public class SaveField extends Field {
      */
     public SaveField(int fieldNumber) {
         super(fieldNumber);
+        super.setFieldColor(Color.LIGHT_GRAY);
     }
 
     // Methods
@@ -46,7 +49,6 @@ public class SaveField extends Field {
         if(getHats().size() < maxGamePieces) {
             return super.joinField(hat);
         } else {
-            System.out.println("Maximum of game pieces resting!");
             return false;
         }
     }
