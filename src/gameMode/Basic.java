@@ -1,7 +1,10 @@
 package gameMode;
 
+import exception.FieldNotFoundException;
+import exception.InvalidMoveException;
 import gameBoard.Board;
 import gameBoard.field.Field;
+import gameBoard.field.HomeField;
 import gameBoard.field.SaveField;
 import object.Hat;
 
@@ -66,7 +69,7 @@ public class Basic {
     /**
      * Move the game piece across the game board to a chosen direction.
      * Try to join a SaveField:
-     *   1. maximum of resting game pieces is reached ==> try another move          !!!!!!!!!!!!!!!!!! HUT RESETTEN WG. REKURSION !!!!!!!!!!!!!!!!!!
+     *   1. maximum of resting game pieces is reached ==> try another move
      *   2. free resting spot ==> move completed
      * Try to join a Field:
      *   1. check if the field is empty ==> move completed
@@ -74,7 +77,8 @@ public class Basic {
      *   3. if the player's game piece meets a foreign game piece with the exact dice number ==> capture the foreign game piece
      * @return the game pieces new location
      */
-    public Field moveGamePiece(Field startField, Hat currentHat, int eyes) {
+    public Field moveGamePiece(Field startField, Hat currentHat, int eyes)
+            throws InvalidMoveException, FieldNotFoundException {
         Field previousField;
         Field currentField = startField;
 
@@ -84,8 +88,9 @@ public class Basic {
         }
 
         if(isSaveField(currentField) && !((SaveField) currentField).joinField(currentHat)) {
-                System.out.println("Try another move.");
-                return moveGamePiece(startField, currentHat, eyes); // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            throw new InvalidMoveException("Maximum of game pieces resting! Try another move.");
+        } else if(isHomeField(currentField) && currentField.getFieldColor() != currentHat.getPlayer().getPlayerColor()) {
+            throw new InvalidMoveException("Move to home field of another player not possible.");
         } else {
             if((isSaveField(currentField) && currentField.getHats().size() < ((SaveField) currentField).getMaxGamePieces())
                     || currentField.getHats().size() == 0
@@ -109,24 +114,15 @@ public class Basic {
      * @param currentField the field on which the game piece is located
      * @return new location of the game piece
      */
-    private Field nextMove(Field previousField, Field currentField) {
+    private Field nextMove(Field previousField, Field currentField) throws InvalidMoveException, FieldNotFoundException {
         List<Integer> nextPossibleFields = currentField.getNeighbours();
+        int nextFieldNumber;
+
         if(previousField != currentField) {
             nextPossibleFields.remove(Integer.valueOf(previousField.getFieldNumber()));
         }
-        Scanner input = new Scanner(System.in);
-        int nextFieldNumber;
-        // Choose direction
         if(nextPossibleFields.size() > 1) {
-            System.out.println("Possible moves to: " + nextPossibleFields.toString()
-                    .replace("[", "")
-                    .replace("]", "")
-                    .replace(", ", " | "));
-            System.out.print("Choose a number from above: ");
-            nextFieldNumber = input.nextInt();
-            if(!isNeighbour(nextPossibleFields, nextFieldNumber)) {
-                nextFieldNumber = nextMove(previousField, currentField).getFieldNumber();
-            }
+            nextFieldNumber = chooseDirection(nextPossibleFields);
         } else {
             nextFieldNumber = nextPossibleFields.get(0);
         }
@@ -134,29 +130,37 @@ public class Basic {
     }
 
     /**
+     * Choose direction for crossings.
+     * @param nextPossibleFields the players next possible moves
+     * @return chosen field number
+     */
+    private int chooseDirection(List<Integer> nextPossibleFields) throws InvalidMoveException {
+        Scanner input = new Scanner(System.in);
+        int nextFieldNumber;
+        System.out.println("Possible moves to: " + nextPossibleFields.toString()
+                .replace("[", "")
+                .replace("]", "")
+                .replace(", ", " | "));
+        System.out.print("Choose a number from above: ");
+        nextFieldNumber = input.nextInt();
+        if(nextPossibleFields.contains(nextFieldNumber)) {
+            return nextFieldNumber;
+        } else {
+            throw new InvalidMoveException("Chosen number is not a neighbour.");
+        }
+    }
+
+    /**
      * Get field object via number of given input.
      * @return field object
      */
-    private Field getFieldByNumber(int fieldNumber) {
+    private Field getFieldByNumber(int fieldNumber) throws FieldNotFoundException {
         for (Field field : gameBoard.getAllFields()) {
             if(field.getFieldNumber() == fieldNumber) {
                 return field;
             }
         }
-        return null;
-    }
-
-    /**
-     * Check if given input is a neighbour.
-     * @return true/false
-     */
-    private boolean isNeighbour(List<Integer> neighbours, int input) {
-        for (int neighbour : neighbours) {
-            if(neighbour == input) {
-                return true;
-            }
-        }
-        return false;
+        throw new FieldNotFoundException("fieldNumber not found.");
     }
 
     /**
@@ -164,34 +168,15 @@ public class Basic {
      * @return true/false
      */
     private boolean isSaveField(Field field) {
-        int fieldNumber = field.getFieldNumber();
-        // 1-4 players
-        //if(players.size() <= 4) {
-        if(fieldNumber == 3
-                || fieldNumber == 10
-                || fieldNumber == 16
-                || fieldNumber == 23
-                || fieldNumber == 29
-                || fieldNumber == 36
-                || fieldNumber == 42
-                || fieldNumber == 49
-                || fieldNumber == 56
-                || fieldNumber == 62
-                || fieldNumber == 68
-                || fieldNumber == 74
-        ) {
-            return true;
-        } else {
-            return false;
-        }
-        // 5-6 players
-        //} else {
-        //    if(fieldNumber == 3) {
-        //        return true;
-        //    } else {
-        //        return false;
-        //    }
-        //}
+        return field.getClass() == SaveField.class;
+    }
+
+    /**
+     * Check if the field is a HomeField.
+     * @return true/false
+     */
+    private boolean isHomeField(Field field) {
+        return field.getClass() == HomeField.class;
     }
 
     /**

@@ -49,7 +49,6 @@ public class SaveField extends Field {
         if(getHats().size() < maxGamePieces) {
             return super.joinField(hat);
         } else {
-            System.out.println("Maximum of game pieces resting!");
             return false;
         }
     }
