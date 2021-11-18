@@ -92,6 +92,7 @@ public class Hat extends JFrame {
      * Test Runner.
      * @param args
      */
+    /*
     public static void main(String[] args) {
         // testing
         // creating multiple hats
@@ -108,7 +109,7 @@ public class Hat extends JFrame {
                 new Player(5, 4, Color.green));
         System.out.println(obj[0].getHatPosition());
         //Hat crackHat = new Hat("magenta","6",0, 1);
-    }
+    }*/
 
     /**
      * Getter for the player.
